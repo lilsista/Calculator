@@ -31,7 +31,23 @@ public class RomanConverterServiceImpl extends RemoteServiceServlet implements
     @Override
     public String convertArabeToRoman(Integer nbr) throws IllegalArgumentException {
         //Implement your code
-        return new String("XVXX");
+        String tabUnite [] = {" ","I","II","III","IV","V","VI","VII","VIII","IX"};
+        String tabDizaine [] = {" ","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"};
+        String tabCentaine[] = {" ","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
+        String tabMille[] = {" ","M","MM",};
+        
+        String nbUtilisateur = nbr.toString();
+       
+        int taille = nbUtilisateur.length();
+        switch(taille){
+            case 1 : return tabUnite[nbr]; 
+            case 2 : return tabDizaine[(nbr/10)%10] + tabUnite[(nbr/1)%10]; 
+            case 3 : return tabCentaine [(nbr/100)%10] + tabDizaine[(nbr/10)%10] + tabUnite[(nbr/1)%10] ;
+            case 4 : return tabMille[(nbr/1000)%10] + tabCentaine [(nbr/100)%10] + tabDizaine[(nbr/10)%10] + tabUnite[(nbr/1)%10] ;  
+            default :return  "mauvais chiffre";
+                
+        }
+       // return new String("XVXX");
     }
 
 }
